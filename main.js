@@ -2,6 +2,45 @@
    UnToque — Clean Landing Page Interactions
    ============================================ */
 
+// ---- Password Gate ----
+(function() {
+  const PASS = '67420';
+  const KEY = 'untoque_auth';
+
+  // If already authenticated this session, skip
+  if (sessionStorage.getItem(KEY) === 'true') {
+    const gate = document.getElementById('password-gate');
+    if (gate) gate.style.display = 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const gate = document.getElementById('password-gate');
+    const input = document.getElementById('password-input');
+    const btn = document.getElementById('password-btn');
+    const error = document.getElementById('password-error');
+
+    if (!gate || sessionStorage.getItem(KEY) === 'true') return;
+
+    function tryUnlock() {
+      if (input.value === PASS) {
+        sessionStorage.setItem(KEY, 'true');
+        gate.classList.add('hidden');
+        setTimeout(() => { gate.style.display = 'none'; }, 600);
+      } else {
+        input.classList.add('shake');
+        error.classList.add('visible');
+        setTimeout(() => { input.classList.remove('shake'); }, 500);
+        setTimeout(() => { error.classList.remove('visible'); }, 2500);
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    btn.addEventListener('click', tryUnlock);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+  });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Nav scroll ----

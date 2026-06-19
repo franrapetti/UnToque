@@ -126,6 +126,129 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: #7702fd;
   border-radius: 2px;
 }
+/* ============ PASSWORD GATE ============ */
+.password-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #f8f4ff 0%, #efe8fb 30%, #f0eafc 60%, #faf8ff 100%);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.password-gate.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.password-gate__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 48px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(119, 2, 253, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 8px 40px rgba(119, 2, 253, 0.08), 0 1px 3px rgba(0,0,0,0.04);
+  max-width: 400px;
+  width: calc(100% - 48px);
+  text-align: center;
+}
+
+.password-gate__logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 28px;
+  object-fit: contain;
+}
+
+.password-gate__text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.password-gate__input-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.password-gate__input {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--gray-900);
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+.password-gate__input:focus {
+  border-color: #7702fd;
+  box-shadow: 0 0 0 4px rgba(119, 2, 253, 0.1);
+}
+
+.password-gate__input.shake {
+  animation: shakeInput 0.4s ease;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.password-gate__btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #7702fd;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.password-gate__btn:hover {
+  background: #5e01cc;
+  transform: scale(1.05);
+}
+
+.password-gate__error {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ef4444;
+  margin-top: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.password-gate__error.visible {
+  opacity: 1;
+}
+
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
 
 /* ============ NAV (Floating Pill) ============ */
 .nav {
