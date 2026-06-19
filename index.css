@@ -686,16 +686,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .logo-img {
-  height: 32px;
+  height: 38px;
   max-width: 140px;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.5);
+  filter: grayscale(100%) contrast(0%) brightness(130%);
+  mix-blend-mode: multiply;
+  opacity: 0.6;
   transition: all 0.3s ease;
   user-select: none;
 }
 
 .logo-img:hover { 
-  filter: grayscale(0%) opacity(1); 
+  opacity: 1;
+  filter: grayscale(100%) contrast(0%) brightness(80%);
   transform: scale(1.05);
 }
 
