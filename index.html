@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UnToque — Tarjetas NFC inteligentes para más reseñas en Google</title>
+  <meta name="description" content="Tarjetas NFC inteligentes para recibir más reseñas en Google, conectar con tus clientes y convertir cada interacción física en una acción digital.">
+  <meta property="og:title" content="UnToque — Posicioná tu marca donde se merece">
+  <meta property="og:description" content="Tarjetas NFC inteligentes para negocios en Argentina. Más reseñas, más confianza, más presencia digital.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css?v=6">
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <img src="assets/images/logo.png?v=3" alt="UnToque Logo">
+      </a>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#casos">Casos de uso</a></li>
+      </ul>
+      <a href="#contacto" class="nav__cta">
+        Quiero mi tarjeta
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="hero">
+    <div class="container container--wide">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <div class="hero__badge">
+            <span class="hero__badge-dot"></span>
+            <span class="hero__badge-text">Tecnología NFC para negocios argentinos</span>
+          </div>
+
+          <h1 class="heading-xl hero__title">
+            Posicioná tu marca<br>
+            <span class="accent">donde se merece.</span>
+          </h1>
+
+          <p class="hero__subtitle">
+            Tarjetas NFC inteligentes para recibir más reseñas, conectar con tus clientes y convertir cada interacción física en una acción digital.
+          </p>
+
+          <div class="hero__ctas">
+            <a href="#contacto" class="btn-primary">
+              Quiero mi tarjeta
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#como-funciona" class="btn-secondary">
+              Ver cómo funciona
+              <svg viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <div class="hero__trust">
+            <span class="hero__trust-line">Sin apps · Sin fricción · Solo un toque</span>
+          </div>
+
+          <div class="hero__chips">
+            <span class="chip">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4l-7 7L3 7.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Más reseñas
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4l-7 7L3 7.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Más confianza
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M13.3 4l-7 7L3 7.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Presencia digital
+            </span>
+          </div>
+        </div>
+
+        <div class="hero__visual" id="hero-visual">
+          <div class="hero__card-wrapper" id="hero-card">
+            <div class="hero__card-back">
+              <img src="assets/images/hero-card.png" alt="" aria-hidden="true" class="light-card-img">
+            </div>
+            <img class="hero__card-img light-card-img" src="assets/images/hero-card.png" alt="Tarjeta NFC de Reseñas de Google UnToque">
+            <div class="hero__card-shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TRUST & LOGOS (NOW OUTSIDE HERO) ====== -->
+  <section class="trust-and-logos">
+    <div class="container">
+      <div class="trust-bar__inner">
+        <!-- Google Reviews badge -->
+        <div class="trust-badge">
+          <div class="trust-badge__icon">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 001 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </div>
+          <div class="trust-badge__content">
+            <div class="trust-badge__rating">
+              <span class="trust-badge__score">4.9</span>
+              <div class="trust-badge__stars">
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+              </div>
+            </div>
+            <span class="trust-badge__label">Google Reviews · 127 reseñas</span>
+          </div>
+        </div>
+
+        <!-- Trustpilot badge -->
+        <div class="trust-badge">
+          <div class="trust-badge__icon">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z" fill="#00B67A"/>
+            </svg>
+          </div>
+          <div class="trust-badge__content">
+            <div class="trust-badge__rating">
+              <span class="trust-badge__score">4.8</span>
+              <div class="trust-badge__stars">
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+                <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+              </div>
+            </div>
+            <span class="trust-badge__label">Trustpilot · Excelente</span>
+          </div>
+        </div>
+
+        <!-- NFC certified -->
+        <div class="trust-badge">
+          <div class="trust-badge__icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#7702fd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="trust-badge__content">
+            <div class="trust-badge__rating">
+              <span class="trust-badge__score">NFC Certified</span>
+            </div>
+            <span class="trust-badge__label">Tecnología verificada</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="logos-strip">
+        <p class="logos-strip__label">Empresas que ya confían en nosotros</p>
+        <div class="logos-strip__row">
+          <img src="https://logo.clearbit.com/ypf.com" alt="YPF" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/cinemark.com" alt="Hoyts" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/eataly.com" alt="Italy" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/gridohelado.com" alt="Grido" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/luccianos.net" alt="Luccianos" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/starbucks.com" alt="Starbucks" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/havanna.com.ar" alt="Havanna" class="logo-img" loading="lazy">
+          <img src="https://logo.clearbit.com/cafemartinez.com" alt="Café Martínez" class="logo-img" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROBLEM ====== -->
+  <section class="section problem" id="problema">
+    <div class="container">
+      <div class="problem__inner">
+        <div class="section-eyebrow reveal">El problema</div>
+        <h2 class="heading-lg reveal" style="margin-bottom: 20px;">
+          Tus clientes te eligen, pero muchas veces no te dejan una reseña.
+        </h2>
+        <p class="problem__text reveal reveal-delay-1">
+          Piden tu nombre para buscarte en Google, se olvidan. Les mandás un link por WhatsApp, no lo abren. O simplemente se van satisfechos sin dejar constancia.
+        </p>
+        <p class="problem__text reveal reveal-delay-2">
+          Las reseñas son la nueva moneda de confianza digital. Pero la fricción las mata.
+        </p>
+        <span class="problem__highlight reveal reveal-delay-3">
+          ✦ UnToque elimina la fricción
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SOLUTION ====== -->
+  <section class="section solution" id="como-funciona">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-eyebrow reveal" style="justify-content:center;">Cómo funciona</div>
+        <h2 class="heading-lg reveal">Tres pasos. Un toque.</h2>
+        <p class="reveal reveal-delay-1" style="max-width: 480px; margin: 12px auto 0; color: var(--gray-500); font-size: 1rem;">
+          Tan simple que funciona solo.
+        </p>
+      </div>
+
+      <div class="solution__steps">
+        <div class="step-card reveal">
+          <div class="step-number">1</div>
+          <h3 class="step-card__title">El cliente acerca el celular</h3>
+          <p class="step-card__text">Solo necesita acercar su teléfono a la tarjeta NFC. Sin descargar ninguna app.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-1">
+          <div class="step-number">2</div>
+          <h3 class="step-card__title">Se abre el link automáticamente</h3>
+          <p class="step-card__text">El enlace de reseña de Google se abre al instante en el navegador. Sin pasos extra.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-2">
+          <div class="step-number">3</div>
+          <h3 class="step-card__title">Tu negocio gana reputación</h3>
+          <p class="step-card__text">El cliente deja su reseña en segundos. Tu negocio sube en el ranking de Google.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SHOWCASE ====== -->
+  <section class="section showcase" id="producto">
+    <div class="container container--wide">
+      <div class="text-center">
+        <div class="section-eyebrow reveal" style="justify-content:center;">El producto</div>
+        <h2 class="heading-lg reveal">Diseñada para impresionar.</h2>
+        <p class="reveal reveal-delay-1" style="max-width: 480px; margin: 12px auto 0; color: var(--gray-500); font-size: 1rem;">
+          Una tarjeta física. Infinitas posibilidades digitales.
+        </p>
+      </div>
+
+      <div class="showcase__gallery">
+        <div class="showcase__item reveal">
+          <img src="assets/images/card-original.png" alt="Tarjeta NFC UnToque — vista frontal" class="light-card-img" loading="lazy">
+          <span class="showcase__item-label">Vista frontal</span>
+        </div>
+        <div class="showcase__item reveal reveal-delay-1">
+          <img src="assets/images/card-side.png" alt="Tarjeta NFC UnToque — grosor premium" class="light-card-img" loading="lazy">
+          <span class="showcase__item-label">Grosor premium</span>
+        </div>
+        <div class="showcase__item reveal reveal-delay-2">
+          <img src="assets/images/phone-tap.png" alt="Interacción NFC — teléfono sobre tarjeta" class="light-card-img" loading="lazy">
+          <span class="showcase__item-label">Interacción NFC</span>
+        </div>
+        <div class="showcase__item reveal reveal-delay-3">
+          <img src="assets/images/card-counter.png" alt="Tarjeta NFC en mostrador de restaurante" class="light-card-img" loading="lazy">
+          <span class="showcase__item-label">En tu mostrador</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== BENEFITS ====== -->
+  <section class="section benefits" id="beneficios">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-eyebrow reveal" style="justify-content:center;">Beneficios</div>
+        <h2 class="heading-lg reveal">Todo lo que tu negocio necesita.</h2>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card bento-card--wide reveal">
+          <div class="bento-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+          </div>
+          <h3 class="bento-card__title">Aumentá tus reseñas en Google</h3>
+          <p class="bento-card__text">Convertí cada visita satisfactoria en una reseña real. Los negocios que usan UnToque ven un incremento significativo en su cantidad de reseñas.</p>
+        </div>
+        <div class="bento-card reveal reveal-delay-1">
+          <div class="bento-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="bento-card__title">Mejorá tu reputación digital</h3>
+          <p class="bento-card__text">Más reseñas positivas significan más confianza y mejor posicionamiento en Google Maps.</p>
+        </div>
+        <div class="bento-card reveal">
+          <div class="bento-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+          </div>
+          <h3 class="bento-card__title">Marca más profesional</h3>
+          <p class="bento-card__text">Hacé que tu negocio se vea tan profesional como el servicio que ofrece.</p>
+        </div>
+        <div class="bento-card reveal reveal-delay-1">
+          <div class="bento-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="bento-card__title">Cero fricción para tus clientes</h3>
+          <p class="bento-card__text">No necesitan descargar apps, buscar tu negocio ni seguir instrucciones. Un toque y listo.</p>
+        </div>
+        <div class="bento-card bento-card--wide reveal reveal-delay-2">
+          <div class="bento-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+          </div>
+          <h3 class="bento-card__title">Redirección editable + NFC y QR</h3>
+          <p class="bento-card__text">Cambiá el destino del link desde el panel cuando quieras. Y si el celular no tiene NFC, el QR funciona igual. Ideal para mostradores, mesas, recepciones, eventos y puntos de atención.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== REDIRECTION ====== -->
+  <section class="section redirection" id="redireccion">
+    <div class="container">
+      <div class="redirection__grid">
+        <div class="reveal">
+          <div class="section-eyebrow">Redirección dinámica</div>
+          <h2 class="heading-md">Tu tarjeta no queda atada para siempre a un solo destino.</h2>
+          <p style="margin-top: 14px; color: var(--gray-500); font-size: 0.95rem; line-height: 1.7;">
+            Podés cambiar el enlace cuando lo necesites, sin reimprimir, sin costo extra.
+          </p>
+          <ul class="redirection__list">
+            <li>Reseñas de Google</li>
+            <li>WhatsApp directo</li>
+            <li>Instagram o redes sociales</li>
+            <li>Menú digital</li>
+            <li>Promociones o descuentos</li>
+            <li>Landing personalizada</li>
+          </ul>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="admin-mockup">
+            <div class="admin-mockup__header">
+              <span class="admin-mockup__dot admin-mockup__dot--red"></span>
+              <span class="admin-mockup__dot admin-mockup__dot--yellow"></span>
+              <span class="admin-mockup__dot admin-mockup__dot--green"></span>
+            </div>
+            <div class="admin-mockup__body">
+              <div class="admin-mockup__field">
+                <span class="admin-mockup__field-label">Tarjeta</span>
+                <span class="admin-mockup__field-value">UnToque #001</span>
+              </div>
+              <div class="admin-mockup__field">
+                <span class="admin-mockup__field-label">Estado</span>
+                <span class="admin-mockup__field-value" style="color: #22c55e;">● Activa</span>
+              </div>
+              <div class="admin-mockup__field admin-mockup__field--active">
+                <span class="admin-mockup__field-label">Destino actual</span>
+                <span class="admin-mockup__field-value">Reseña de Google ↗</span>
+              </div>
+              <div class="admin-mockup__field">
+                <span class="admin-mockup__field-label">Toques este mes</span>
+                <span class="admin-mockup__field-value">47</span>
+              </div>
+              <div class="admin-mockup__field">
+                <span class="admin-mockup__field-label">Último toque</span>
+                <span class="admin-mockup__field-value">Hace 2 horas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== USE CASES ====== -->
+  <section class="section usecases" id="casos">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-eyebrow reveal" style="justify-content:center;">Casos de uso</div>
+        <h2 class="heading-lg reveal">Para todo tipo de negocio.</h2>
+        <p class="reveal reveal-delay-1" style="max-width: 460px; margin: 12px auto 0; color: var(--gray-500); font-size: 1rem;">
+          Donde haya un cliente satisfecho, hay una oportunidad de reseña.
+        </p>
+      </div>
+      <div class="usecases__grid">
+        <div class="usecase-card reveal"><span class="usecase-card__icon">🍽️</span><span class="usecase-card__name">Restaurantes</span></div>
+        <div class="usecase-card reveal reveal-delay-1"><span class="usecase-card__icon">☕</span><span class="usecase-card__name">Cafeterías</span></div>
+        <div class="usecase-card reveal reveal-delay-2"><span class="usecase-card__icon">🏨</span><span class="usecase-card__name">Hoteles</span></div>
+        <div class="usecase-card reveal reveal-delay-3"><span class="usecase-card__icon">💪</span><span class="usecase-card__name">Gimnasios</span></div>
+        <div class="usecase-card reveal"><span class="usecase-card__icon">👨‍⚕️</span><span class="usecase-card__name">Profesionales</span></div>
+        <div class="usecase-card reveal reveal-delay-1"><span class="usecase-card__icon">🏪</span><span class="usecase-card__name">Locales comerciales</span></div>
+        <div class="usecase-card reveal reveal-delay-2"><span class="usecase-card__icon">🏠</span><span class="usecase-card__name">Inmobiliarias</span></div>
+        <div class="usecase-card reveal reveal-delay-3"><span class="usecase-card__icon">🎤</span><span class="usecase-card__name">Eventos</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SOCIAL PROOF ====== -->
+  <section class="section social-proof" id="testimonios">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-eyebrow reveal" style="justify-content:center;">Testimonios</div>
+        <h2 class="heading-lg reveal">Negocios que ya confían en UnToque.</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+          </div>
+          <p class="testimonial-quote">
+            "Antes dependíamos de que el cliente nos buscara en Google. Ahora solo acerca el celular y deja la reseña. Pasamos de 40 a 120 reseñas en tres meses."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">ML</div>
+            <div class="testimonial-info">
+              <span class="testimonial-name">Martín López</span>
+              <span class="testimonial-role">Restaurante La Esquina, Palermo</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+          </div>
+          <p class="testimonial-quote">
+            "La tarjeta se ve increíble sobre la barra. Los clientes preguntan qué es, la usan, y se van contentos. Una inversión mínima con un retorno enorme."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">CR</div>
+            <div class="testimonial-info">
+              <span class="testimonial-name">Carolina Ruiz</span>
+              <span class="testimonial-role">Café Aroma, Recoleta</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+            <svg viewBox="0 0 16 16"><path d="M8 1l2.2 4.4 4.8.7-3.5 3.4.8 4.8L8 12l-4.3 2.3.8-4.8L1 6.1l4.8-.7z"/></svg>
+          </div>
+          <p class="testimonial-quote">
+            "Tenemos tarjetas en la recepción y en cada habitación. Los huéspedes las usan al hacer el checkout. Nuestra puntuación subió de 4.2 a 4.7."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SF</div>
+            <div class="testimonial-info">
+              <span class="testimonial-name">Santiago Fernández</span>
+              <span class="testimonial-role">Hotel Boutique Cielo, Mendoza</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FINAL CTA ====== -->
+  <section class="final-cta" id="contacto">
+    <div class="container">
+      <div class="final-cta__inner">
+        <div class="section-eyebrow reveal" style="justify-content:center;">Empezá hoy</div>
+        <h2 class="heading-lg reveal">
+          Tu marca no debería<br>pasar desapercibida.
+        </h2>
+        <p class="final-cta__subtitle reveal reveal-delay-1">
+          Poné tu negocio a un toque de distancia.<br>
+          Hacé que tu negocio se vea tan profesional como el servicio que ofrece.
+        </p>
+        <div class="final-cta__buttons reveal reveal-delay-2">
+          <a href="#" class="btn-primary">
+            Solicitar presupuesto
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://wa.me/5491100000000" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">
+          <img src="assets/images/logo.png?v=3" alt="UnToque Logo">
+        </div>
+        <span class="footer__text">© 2026 UnToque. Todos los derechos reservados. Buenos Aires, Argentina.</span>
+        <ul class="footer__links">
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js?v=5"></script>
+</body>
+</html>
