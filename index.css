@@ -760,43 +760,36 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .problem__images {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   width: 100%;
-  aspect-ratio: 4/3;
-  margin-top: 20px;
 }
 
 .trust-img {
-  position: absolute;
   border-radius: 24px;
   box-shadow: 0 24px 48px rgba(0,0,0,0.4);
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: transform 0.4s var(--ease-smooth);
+  width: 100%;
+  height: auto;
 }
 
 .trust-img--main {
-  width: 80%;
-  height: 80%;
-  top: 0;
-  left: 0;
-  z-index: 2;
+  transform: translateX(-16px);
 }
 
 .trust-img--secondary {
-  width: 60%;
-  height: 60%;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  transform: translate(-10%, 15%);
+  transform: translateX(16px);
 }
 
-.problem__images:hover .trust-img--main {
-  transform: scale(1.02);
+.trust-img--main:hover {
+  transform: translateX(-16px) scale(1.02);
 }
-.problem__images:hover .trust-img--secondary {
-  transform: translate(-10%, 15%) scale(1.03);
+
+.trust-img--secondary:hover {
+  transform: translateX(16px) scale(1.02);
 }
 
 .problem__text {
