@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const r = card.getBoundingClientRect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;
-      card.style.background = `radial-gradient(circle 220px at ${x}px ${y}px, rgba(119, 2, 253, 0.035) 0%, var(--white) 60%)`;
+      card.style.background = `radial-gradient(circle 250px at ${x}px ${y}px, rgba(119, 2, 253, 0.15) 0%, rgba(255, 255, 255, 0.0) 60%)`;
     });
     card.addEventListener('mouseleave', () => { card.style.background = ''; });
   });
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.usecase-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const r = card.getBoundingClientRect();
-      card.style.background = `radial-gradient(circle 100px at ${e.clientX - r.left}px ${e.clientY - r.top}px, rgba(119, 2, 253, 0.05) 0%, var(--white) 60%)`;
+      card.style.background = `radial-gradient(circle 120px at ${e.clientX - r.left}px ${e.clientY - r.top}px, rgba(119, 2, 253, 0.1) 0%, rgba(255, 255, 255, 0.0) 60%)`;
     });
     card.addEventListener('mouseleave', () => { card.style.background = ''; });
   });
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const r = item.getBoundingClientRect();
       const x = ((e.clientX - r.left) / r.width) * 100;
       const y = ((e.clientY - r.top) / r.height) * 100;
-      item.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(119, 2, 253, 0.04) 0%, var(--bg-alt) 50%)`;
+      item.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(119, 2, 253, 0.1) 0%, rgba(255, 255, 255, 0.0) 50%)`;
     });
     item.addEventListener('mouseleave', () => { item.style.background = ''; });
   });
@@ -156,13 +156,22 @@ document.addEventListener('DOMContentLoaded', () => {
     adminFields[fieldIdx].classList.add('admin-mockup__field--active');
   }, 3000);
 
-  // ---- Button press micro-interaction ----
+  // ---- Magnetic Button & Press Micro-interaction ----
   document.querySelectorAll('.btn-primary, .btn-secondary, .btn-whatsapp, .nav__cta').forEach(btn => {
-    btn.addEventListener('mousedown', () => { btn.style.transform = 'scale(0.97)'; });
-    btn.addEventListener('mouseup', () => { btn.style.transform = ''; });
-    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    btn.addEventListener('mousemove', (e) => {
+      btn.classList.add('no-transform-transition');
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.02)`;
+    });
+    btn.addEventListener('mousedown', () => { btn.style.transform += ' scale(0.95)'; });
+    btn.addEventListener('mouseup', () => { btn.style.transform = btn.style.transform.replace(' scale(0.95)', ''); });
+    btn.addEventListener('mouseleave', () => { 
+      btn.style.transform = 'translate(0px, 0px) scale(1)'; 
+      setTimeout(() => btn.classList.remove('no-transform-transition'), 50);
+    });
   });
-
   // ---- Testimonial subtle tilt ----
   document.querySelectorAll('.testimonial-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
