@@ -554,6 +554,106 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transform: translate(24px, 0px);
 }
 
+.floating-badge {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(20, 20, 25, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 20px;
+  border-radius: 100px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  animation: popInBadge 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.floating-badge--review {
+  top: 15%;
+  left: -25%;
+  animation-delay: 1.2s;
+}
+
+.floating-badge--stats {
+  bottom: 25%;
+  right: -30%;
+  animation-delay: 1.5s;
+}
+
+@keyframes popInBadge {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.floating-badge__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.floating-badge__icon--purple {
+  background: rgba(119, 2, 253, 0.2);
+  color: var(--brand-lighter);
+}
+.floating-badge__icon--purple svg {
+  width: 20px;
+  height: 20px;
+}
+
+.floating-badge__stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.floating-badge__stars svg {
+  width: 14px;
+  height: 14px;
+  fill: #FBB040;
+}
+
+.floating-badge__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.floating-badge__subtitle {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .floating-badge {
+    transform: scale(0.8);
+  }
+  .floating-badge--review { top: 0%; left: -10%; }
+  .floating-badge--stats { bottom: 10%; right: -10%; }
+}
+
+@media (max-width: 768px) {
+  .floating-badge {
+    transform: scale(0.7);
+  }
+  .floating-badge--review { top: -5%; left: 0%; }
+  .floating-badge--stats { bottom: 0%; right: 0%; }
+}
+
 .hero__card-wrapper {
   position: relative;
   width: 320px;
