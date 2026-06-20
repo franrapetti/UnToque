@@ -157,21 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 3000);
 
   // ---- Magnetic Button & Press Micro-interaction ----
-  document.querySelectorAll('.btn-primary, .btn-secondary, .btn-whatsapp, .nav__cta').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      btn.classList.add('no-transform-transition');
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.02)`;
-    });
-    btn.addEventListener('mousedown', () => { btn.style.transform += ' scale(0.95)'; });
-    btn.addEventListener('mouseup', () => { btn.style.transform = btn.style.transform.replace(' scale(0.95)', ''); });
-    btn.addEventListener('mouseleave', () => { 
-      btn.style.transform = 'translate(0px, 0px) scale(1)'; 
-      setTimeout(() => btn.classList.remove('no-transform-transition'), 50);
-    });
-  });
+  // (Effect removed as requested)
   // ---- Testimonial subtle tilt ----
   document.querySelectorAll('.testimonial-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
