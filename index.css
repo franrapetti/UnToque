@@ -612,6 +612,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   height: 20px;
 }
 
+.floating-badge__icon--notify {
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+.floating-badge__icon--notify svg {
+  width: 20px;
+  height: 20px;
+}
+
 .floating-badge__stars {
   display: flex;
   gap: 2px;
