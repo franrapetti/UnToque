@@ -624,6 +624,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   fill: #FBB040;
 }
 
+.floating-badge__score {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
 .floating-badge__title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -633,7 +641,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .floating-badge__subtitle {
   font-size: 0.75rem;
-  color: var(--gray-500);
+  color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   font-weight: 500;
 }
