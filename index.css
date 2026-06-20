@@ -289,7 +289,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   flex-shrink: 0;
 }
 
-.nav__logo img { height: 44px; width: auto; object-fit: contain; filter: invert(1) brightness(2); }
+.nav__logo img { height: 52px; width: auto; object-fit: contain; filter: invert(1) brightness(2); }
 
 .nav__links {
   display: flex;
