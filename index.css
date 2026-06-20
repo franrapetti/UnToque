@@ -573,10 +573,46 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   pointer-events: none;
 }
 
-.floating-badge--review {
+.floating-badge--notification {
+  border-radius: 20px;
+  padding: 14px 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 220px;
   top: 15%;
   left: -25%;
   animation-delay: 1.2s;
+  background: rgba(30, 30, 35, 0.7);
+}
+
+.floating-badge__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.floating-badge__header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.floating-badge__time {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.floating-badge__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .floating-badge--stats {
@@ -660,7 +696,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .floating-badge {
     transform: scale(0.8);
   }
-  .floating-badge--review { top: 0%; left: -10%; }
+  .floating-badge--notification { top: 0%; left: -10%; }
   .floating-badge--stats { bottom: 10%; right: -10%; }
 }
 
@@ -668,7 +704,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .floating-badge {
     transform: scale(0.7);
   }
-  .floating-badge--review { top: -5%; left: 0%; }
+  .floating-badge--notification { top: -5%; left: 0%; }
   .floating-badge--stats { bottom: 0%; right: 0%; }
 }
 
