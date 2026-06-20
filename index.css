@@ -541,7 +541,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   perspective: 1200px;
   animation: fadeIn 1.2s var(--ease-out) 0.3s forwards;
   opacity: 0;
-  transform: translate(24px, 96px);
+  transform: translate(24px, 0px);
 }
 
 .hero__card-wrapper {
@@ -701,6 +701,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   filter: grayscale(100%) contrast(0%) brightness(80%);
   transform: scale(1.05);
 }
+
+.logo-text {
+  font-size: 28px;
+  color: #999;
+  user-select: none;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.logo-text:hover {
+  opacity: 1;
+  color: #777;
+  transform: scale(1.05);
+}
+
+.logo-text--rapanui { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -1px; }
+.logo-text--luccianos { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
 
 /* ============ PROBLEM ============ */
 .problem {
