@@ -1048,7 +1048,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .bento-card {
   position: relative;
-  padding: 64px 48px;
+  padding: 48px 40px;
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
