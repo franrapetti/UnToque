@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import LoginPage from './auth/LoginPage';
 import DashboardPage from './dashboard/DashboardPage';
+import CatalogPage from './dashboard/CatalogPage';
 import DashboardLayout from './dashboard/DashboardLayout';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import { ThemeProvider } from './dashboard/ThemeContext';
@@ -37,6 +38,16 @@ const App = () => {
                   <ProtectedRoute>
                     <DashboardLayout>
                       <DashboardPage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/catalog"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <CatalogPage />
                     </DashboardLayout>
                   </ProtectedRoute>
                 }

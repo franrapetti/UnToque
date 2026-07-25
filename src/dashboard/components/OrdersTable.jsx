@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Search, Filter } from 'lucide-react';
-import { getOrders, formatARSFull } from '../data/mockData';
+import { getOrdersStore } from '../data/orderStore';
+import { formatARSFull } from '../data/mockData';
 import { useFilter } from '../contexts/FilterContext';
 import { useTheme } from '../ThemeContext';
+import AddOrderModal from './AddOrderModal';
 
 export default function OrdersTable() {
   const { theme, isDark } = useTheme();
@@ -11,8 +13,19 @@ export default function OrdersTable() {
   const [activeTab, setActiveTab] = useState('Todos');
   const [search, setSearch] = useState('');
   const [visibleCount, setVisibleCount] = useState(20);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   
-  const allOrders = getOrders(dateRange);
+  // Real orders instead of mock
+  const [allOrders, setAllOrders] = useState([]);
+  
+  // Load orders
+  const loadOrders = () => {
+    setAllOrders(getOrdersStore());
+  };
+
+  React.useEffect(() => {
+    loadOrders();
+  }, []);
   
   // Tabs and counts
   const tabs = ['Todos', 'Completado', 'Enviado', 'Pendiente'];
@@ -52,9 +65,17 @@ export default function OrdersTable() {
       className="glass-card p-6"
     >
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
-        <div className="flex items-center gap-2">
-          <ShoppingBag className="text-sapphire w-6 h-6" />
-          <h2 className="text-xl font-bold dark:text-ghost">Pedidos Recientes</h2>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <ShoppingBag className="text-sapphire w-6 h-6" />
+            <h2 className="text-xl font-bold dark:text-ghost">Pedidos Recientes</h2>
+          </div>
+          <button 
+            onClick={() => setIsAddModalOpen(true)}
+            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-sapphire text-white rounded-xl text-sm font-medium hover:bg-sapphire/90 transition-colors"
+          >
+            Añadir Venta
+          </button>
         </div>
         
         <div className="flex flex-col xl:flex-row gap-4 w-full lg:w-auto min-w-0 flex-1 justify-end">
@@ -171,6 +192,24 @@ export default function OrdersTable() {
           </button>
         </div>
       )}
+
+      {/* Floating Add Button for Mobile */}
+      <button 
+        onClick={() => setIsAddModalOpen(true)}
+        className="sm:hidden fixed bottom-20 right-4 w-12 h-12 bg-sapphire text-white rounded-full flex items-center justify-center shadow-lg z-40"
+      >
+        <ShoppingBag size={20} />
+      </button>
+
+      <AddOrderModal 
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAdded={() => {
+          loadOrders();
+          // Optional: trigger global update if needed later
+          window.dispatchEvent(new Event('orders-updated'));
+        }}
+      />
     </motion.div>
   );
 }

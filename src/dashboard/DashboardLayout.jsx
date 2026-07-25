@@ -10,9 +10,11 @@ import {
   Moon, 
   ChevronLeft, 
   ChevronRight,
-  LogOut
+  LogOut,
+  Tag
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme, ThemeProvider } from './ThemeContext';
 import { FilterProvider } from './contexts/FilterContext';
 import { useAuth } from '../auth/AuthContext';
@@ -21,10 +23,11 @@ import logo from '../../logo.svg';
 const NavItem = ({ icon: Icon, label, href, isCollapsed, isActive }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const isHash = href.includes('#');
   
   return (
-    <a 
-      href={href}
+    <Link 
+      to={href}
       className={`flex items-center p-3 my-1 rounded-xl transition-all duration-200 ease-in-out ${
         isActive 
           ? (isDark ? 'text-ghost bg-white/5' : 'text-ink bg-black/5')
@@ -44,13 +47,14 @@ const NavItem = ({ icon: Icon, label, href, isCollapsed, isActive }) => {
           </motion.span>
         )}
       </AnimatePresence>
-    </a>
+    </Link>
   );
 };
 
 export default function DashboardLayout({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
   
   // Safe destructuring in case AuthContext isn't fully implemented yet
   const auth = useAuth() || {};
@@ -60,12 +64,13 @@ export default function DashboardLayout({ children }) {
   const isDark = theme === 'dark';
 
   const navItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '#section-dashboard', isActive: true },
-    { icon: TrendingUp, label: 'Cashflow', href: '#section-cashflow' },
-    { icon: CalendarClock, label: 'Gastos', href: '#section-expenses' },
-    { icon: Receipt, label: 'Impuestos', href: '#section-taxes' },
-    { icon: ShoppingBag, label: 'Pedidos', href: '#section-orders' },
-    { icon: Users, label: 'Usuarios', href: '#section-users' },
+    { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
+    { icon: Tag, label: 'Catálogo', href: '/dashboard/catalog' },
+    { icon: TrendingUp, label: 'Cashflow', href: '/dashboard#section-cashflow' },
+    { icon: CalendarClock, label: 'Gastos', href: '/dashboard#section-expenses' },
+    { icon: Receipt, label: 'Impuestos', href: '/dashboard#section-taxes' },
+    { icon: ShoppingBag, label: 'Pedidos', href: '/dashboard#section-orders' },
+    { icon: Users, label: 'Usuarios', href: '/dashboard#section-users' },
   ];
 
   return (
@@ -95,16 +100,26 @@ export default function DashboardLayout({ children }) {
           </div>
 
           <nav className="flex-1 px-3 overflow-y-auto mt-4">
-            {navItems.map((item, idx) => (
-              <NavItem 
-                key={idx}
-                icon={item.icon}
-                label={item.label}
-                href={item.href}
-                isCollapsed={isCollapsed}
-                isActive={item.isActive}
-              />
-            ))}
+            {navItems.map((item, idx) => {
+              const isActive = location.pathname === item.href.split('#')[0] && 
+                               (item.href.includes('#') ? location.hash === '#' + item.href.split('#')[1] || (location.hash === '' && item.href === '/dashboard') : true);
+              
+              // Simplification: just match pathname if it's catalog, otherwise match dashboard
+              const isReallyActive = item.href === '/dashboard/catalog' 
+                ? location.pathname === '/dashboard/catalog' 
+                : location.pathname === '/dashboard' && (location.hash === item.href.split('#')[1] || (item.label === 'Dashboard' && !location.hash));
+
+              return (
+                <NavItem 
+                  key={idx}
+                  icon={item.icon}
+                  label={item.label}
+                  href={item.href}
+                  isCollapsed={isCollapsed}
+                  isActive={isReallyActive}
+                />
+              );
+            })}
           </nav>
         </div>
 
@@ -160,15 +175,19 @@ export default function DashboardLayout({ children }) {
       <nav className={`lg:hidden fixed bottom-0 left-0 right-0 h-16 ${isDark ? 'bg-charcoal/90 border-t border-white/10' : 'bg-white/90 border-t border-black/10'} backdrop-blur-md flex items-center justify-around px-2 z-50`}>
         {navItems.map((item, idx) => {
           const Icon = item.icon;
+          const isActive = item.href === '/dashboard/catalog' 
+            ? location.pathname === '/dashboard/catalog' 
+            : location.pathname === '/dashboard' && (location.hash === item.href.split('#')[1] || (item.label === 'Dashboard' && !location.hash));
+
           return (
-            <a 
+            <Link 
               key={idx}
-              href={item.href}
-              className={`p-2 rounded-xl flex flex-col items-center ${item.isActive ? (isDark ? 'text-emerald' : 'text-emerald') : 'text-silver'}`}
+              to={item.href}
+              className={`p-2 rounded-xl flex flex-col items-center ${isActive ? (isDark ? 'text-emerald' : 'text-emerald') : 'text-silver'}`}
             >
               <Icon className="w-5 h-5 mb-1" />
               <span className="text-[10px] font-medium">{item.label}</span>
-            </a>
+            </Link>
           );
         })}
       </nav>

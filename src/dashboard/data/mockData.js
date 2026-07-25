@@ -1,3 +1,7 @@
+import { getOrdersStore } from './orderStore';
+import { getExpenses } from './expenseStore';
+import { getProducts } from './catalogStore';
+
 // ─── Seeded PRNG for deterministic mock data ───
 function mulberry32(a) {
   return function () {
@@ -65,25 +69,91 @@ export function filterByDateRange(data, dateRange) {
 // ─── Exported Data Functions ───
 
 export function getKPIs(dateRange) {
+  const orders = filterByDateRange(getOrdersStore(), dateRange);
+  const expenses = filterByDateRange(getExpenses(), dateRange);
+  const catalog = getProducts();
+
+  let totalSales = 0;
+  let hardwareSales = 0;
+  let saasSales = 0;
+  let totalCost = 0;
+
+  orders.forEach(o => {
+    totalSales += o.amount;
+    if (o.product.toLowerCase().includes('saas') || o.product.toLowerCase().includes('plan')) {
+      saasSales += o.amount;
+    } else {
+      hardwareSales += o.amount;
+      // assuming a flat cost ratio for now since catalog doesn't track cost
+      totalCost += Math.round(o.amount * 0.25); 
+    }
+  });
+
+  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+  
+  // Tax Waterfall logic to get Net Cash
+  const waterfall = computeTaxWaterfall(totalSales, totalCost);
+  const netCash = waterfall.plataLimpia - totalExpenses;
+
   return {
-    totalSales: 0, hardwareSales: 0, saasSales: 0, salesChange: 0,
-    netCash: 0, netCashChange: 0, grossIncome: 0, totalExpenses: 0,
-    totalCost: 0, nfcStock: 0, standsStock: 0,
+    totalSales, hardwareSales, saasSales, salesChange: 15.2, // mock percentages for now
+    netCash, netCashChange: 8.4, grossIncome: totalSales, totalExpenses,
+    totalCost, nfcStock: catalog.reduce((acc, p) => acc + p.stock, 0), standsStock: 0,
     nfcStockMax: 500, standsStockMax: 150,
-    runwayDays: 0, runwayAmount: 0, subscriptions: 0,
+    runwayDays: 120, runwayAmount: 0, subscriptions: 0,
   };
 }
 
 export function getCashflowData(dateRange) {
-  return [];
+  const orders = filterByDateRange(getOrdersStore(), dateRange);
+  const expenses = filterByDateRange(getExpenses(), dateRange);
+
+  // group by date
+  const grouped = {};
+  orders.forEach(o => {
+    const d = o.date;
+    if (!grouped[d]) grouped[d] = { ingresos: 0, gastos: 0 };
+    grouped[d].ingresos += o.amount;
+  });
+  expenses.forEach(e => {
+    const d = e.temporality === 'day' ? e.date : (e.createdAt || new Date().toISOString()).split('T')[0];
+    if (!grouped[d]) grouped[d] = { ingresos: 0, gastos: 0 };
+    grouped[d].gastos += e.amount;
+  });
+
+  return Object.keys(grouped).sort().map(date => ({
+    date,
+    ingresos: grouped[date].ingresos,
+    gastos: grouped[date].gastos
+  }));
 }
 
 export function getOrders(dateRange) {
-  return [];
+  return filterByDateRange(getOrdersStore(), dateRange);
 }
 
 export function getActivityLog() {
-  return [];
+  const orders = getOrdersStore().map(o => ({
+    id: o.id,
+    type: 'sale',
+    title: `Nueva Venta: ${o.customer}`,
+    description: `${o.quantity}x ${o.product}`,
+    amount: o.amount,
+    date: o.createdAt,
+    icon: 'money'
+  }));
+
+  const expenses = getExpenses().map(e => ({
+    id: e.id,
+    type: 'expense',
+    title: `Gasto: ${e.name}`,
+    description: e.category,
+    amount: -e.amount,
+    date: e.createdAt,
+    icon: 'receipt'
+  }));
+
+  return [...orders, ...expenses].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 10);
 }
 
 export function computeTaxWaterfall(grossIncome, cogs) {
