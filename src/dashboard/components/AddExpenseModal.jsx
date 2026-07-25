@@ -113,7 +113,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
                   onClick={() => setFormData(prev => ({ ...prev, temporality: 'day', dateValue: '' }))}
                   className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all ${
                     formData.temporality === 'day' 
-                      ? 'bg-emerald-light border-emerald text-emerald' 
+                      ? 'bg-emerald/10 border-emerald/50 text-emerald dark:border-emerald' 
                       : 'bg-black/5 dark:bg-white/5 border-white/10 text-silver hover:border-white/20'
                   }`}
                 >
@@ -125,7 +125,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
                   onClick={() => setFormData(prev => ({ ...prev, temporality: 'week', dateValue: '' }))}
                   className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all ${
                     formData.temporality === 'week' 
-                      ? 'bg-sapphire/20 border-sapphire text-sapphire' 
+                      ? 'bg-sapphire/10 border-sapphire/50 text-sapphire dark:border-sapphire' 
                       : 'bg-black/5 dark:bg-white/5 border-white/10 text-silver hover:border-white/20'
                   }`}
                 >
@@ -137,7 +137,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
                   onClick={() => setFormData(prev => ({ ...prev, temporality: 'month', dateValue: '' }))}
                   className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all ${
                     formData.temporality === 'month' 
-                      ? 'bg-violet/20 border-violet text-violet' 
+                      ? 'bg-violet/10 border-violet/50 text-violet dark:border-violet' 
                       : 'bg-black/5 dark:bg-white/5 border-white/10 text-silver hover:border-white/20'
                   }`}
                 >
@@ -166,8 +166,8 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
                   onClick={() => setFormData(prev => ({ ...prev, status: prev.status === 'Pendiente' ? 'Pagado' : 'Pendiente' }))}
                   className={`w-full py-2.5 rounded-xl border font-medium transition-all ${
                     formData.status === 'Pendiente' 
-                      ? 'bg-amber-soft border-amber text-amber' 
-                      : 'bg-emerald-light border-emerald text-emerald'
+                      ? 'bg-amber/10 border-amber/50 text-amber dark:border-amber' 
+                      : 'bg-emerald/10 border-emerald/50 text-emerald dark:border-emerald'
                   }`}
                 >
                   {formData.status === 'Pendiente' ? '🟡 Pendiente' : '✅ Pagado'}
