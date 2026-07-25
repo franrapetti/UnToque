@@ -33,42 +33,48 @@ export default function ActivityLog() {
         <h2 className="text-xl font-bold dark:text-ghost">Actividad Reciente</h2>
       </div>
 
-      <div className="relative pl-6">
-        {/* Timeline connecting line */}
-        <div className="absolute left-10 top-2 bottom-2 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent z-0"></div>
-        
-        <div className="flex flex-col gap-6 relative z-10">
-          {logs.map((log, i) => {
-            const { icon: Icon, color, bg } = getIconAndColor(log.type);
-            return (
-              <motion.div 
-                key={log.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="flex gap-4 group"
-              >
-                <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center border border-white/10 ${bg} ${color}`}>
-                  <Icon size={18} />
-                </div>
-                <div className="pt-1">
-                  <p className="font-semibold dark:text-ghost text-sm leading-tight">
-                    {log.action}
-                  </p>
-                  <p className="text-sm text-silver mt-0.5">
-                    {log.detail}
-                  </p>
-                  <p className="text-xs text-silver/60 mt-1.5 flex items-center gap-1.5">
-                    <span className="font-medium text-silver/80">{log.user}</span>
-                    <span>•</span>
-                    <span>{timeAgo(log.timestamp)}</span>
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+      {logs.length === 0 ? (
+        <div className="text-center py-8 text-silver opacity-60">
+          <p>No hay actividad reciente.</p>
         </div>
-      </div>
+      ) : (
+        <div className="relative pl-6">
+          {/* Timeline connecting line */}
+          <div className="absolute left-10 top-2 bottom-2 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent z-0"></div>
+          
+          <div className="flex flex-col gap-6 relative z-10">
+            {logs.map((log, i) => {
+              const { icon: Icon, color, bg } = getIconAndColor(log.type);
+              return (
+                <motion.div 
+                  key={log.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex gap-4 group"
+                >
+                  <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center border border-white/10 ${bg} ${color}`}>
+                    <Icon size={18} />
+                  </div>
+                  <div className="pt-1">
+                    <p className="font-semibold dark:text-ghost text-sm leading-tight">
+                      {log.action}
+                    </p>
+                    <p className="text-sm text-silver mt-0.5">
+                      {log.detail}
+                    </p>
+                    <p className="text-xs text-silver/60 mt-1.5 flex items-center gap-1.5">
+                      <span className="font-medium text-silver/80">{log.user}</span>
+                      <span>•</span>
+                      <span>{timeAgo(log.timestamp)}</span>
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }

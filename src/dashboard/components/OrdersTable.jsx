@@ -57,8 +57,8 @@ export default function OrdersTable() {
           <h2 className="text-xl font-bold dark:text-ghost">Pedidos Recientes</h2>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+        <div className="flex flex-col xl:flex-row gap-4 w-full lg:w-auto min-w-0 flex-1 justify-end">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar min-w-0 w-full xl:w-auto">
             {tabs.map(tab => (
               <button
                 key={tab}

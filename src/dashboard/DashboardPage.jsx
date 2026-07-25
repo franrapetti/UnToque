@@ -53,15 +53,15 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
-          <motion.div id="section-orders" variants={itemVariants} className="w-full lg:w-2/3">
+          <motion.div id="section-orders" variants={itemVariants} className="w-full lg:w-2/3 min-w-0">
             <OrdersTable />
           </motion.div>
-          <motion.div variants={itemVariants} className="w-full lg:w-1/3">
+          <motion.div variants={itemVariants} className="w-full lg:w-1/3 min-w-0">
             <ActivityLog />
           </motion.div>
         </div>
 
-        <motion.div id="section-users" variants={itemVariants} className="w-full">
+        <motion.div id="section-users" variants={itemVariants} className="w-full min-w-0">
           <UserManagement />
         </motion.div>
       </motion.div>
