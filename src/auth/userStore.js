@@ -10,7 +10,7 @@ const DEFAULT_ADMIN = {
   createdBy: 'system',
 };
 
-const DEFAULT_PASSWORD = 'untoque2025';
+const DEFAULT_PASSWORD = '2026';
 
 async function hashPassword(password) {
   const encoder = new TextEncoder();
@@ -23,10 +23,17 @@ async function hashPassword(password) {
 
 export async function seedDefaultUser() {
   const users = getUsers();
+  const passwordHash = await hashPassword(DEFAULT_PASSWORD);
   if (users.length === 0) {
-    const passwordHash = await hashPassword(DEFAULT_PASSWORD);
     const user = { ...DEFAULT_ADMIN, passwordHash };
     localStorage.setItem(STORAGE_KEY, JSON.stringify([user]));
+  } else {
+    // Auto-update admin user password to match new DEFAULT_PASSWORD
+    const adminIdx = users.findIndex((u) => u.email === DEFAULT_ADMIN.email);
+    if (adminIdx !== -1) {
+      users[adminIdx].passwordHash = passwordHash;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+    }
   }
 }
 
