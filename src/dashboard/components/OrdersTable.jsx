@@ -7,11 +7,12 @@ import { useTheme } from '../ThemeContext';
 
 export default function OrdersTable() {
   const { theme, isDark } = useTheme();
+  const { dateRange } = useFilter();
   const [activeTab, setActiveTab] = useState('Todos');
   const [search, setSearch] = useState('');
   const [visibleCount, setVisibleCount] = useState(20);
   
-  const allOrders = getOrders();
+  const allOrders = getOrders(dateRange);
   
   // Tabs and counts
   const tabs = ['Todos', 'Completado', 'Enviado', 'Pendiente'];

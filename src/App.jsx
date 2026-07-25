@@ -5,6 +5,8 @@ import LoginPage from './auth/LoginPage';
 import DashboardPage from './dashboard/DashboardPage';
 import DashboardLayout from './dashboard/DashboardLayout';
 import { AuthProvider, useAuth } from './auth/AuthContext';
+import { ThemeProvider } from './dashboard/ThemeContext';
+import { FilterProvider } from './dashboard/contexts/FilterContext';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -23,22 +25,26 @@ const ProtectedRoute = ({ children }) => {
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <DashboardLayout>
-                  <DashboardPage />
-                </DashboardLayout>
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <ThemeProvider>
+        <FilterProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <DashboardPage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </FilterProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 };

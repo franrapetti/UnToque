@@ -8,7 +8,8 @@ import { TrendingUp } from 'lucide-react';
 
 export default function CashflowChart() {
   const { theme, isDark } = useTheme();
-  const data = getCashflowData();
+  const { dateRange } = useFilter();
+  const data = getCashflowData(dateRange);
 
   // Custom tooltip
   const CustomTooltip = ({ active, payload, label }) => {

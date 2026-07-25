@@ -7,7 +7,8 @@ import { useTheme } from '../ThemeContext';
 
 export default function ArgentinaTaxWaterfall() {
   const { theme, isDark } = useTheme();
-  const kpis = getKPIs();
+  const { dateRange } = useFilter();
+  const kpis = getKPIs(dateRange);
   const waterfall = computeTaxWaterfall(kpis.grossIncome, kpis.totalCost);
 
   return (
