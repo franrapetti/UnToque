@@ -21,7 +21,7 @@ export default function Topbar() {
   ];
 
   return (
-    <div className={`h-16 flex items-center justify-between px-6 sticky top-0 z-10 glass border-b ${isDark ? 'border-white/5' : 'border-black/5'} backdrop-blur-md`}>
+    <div className={`h-16 flex items-center justify-between px-6 sticky top-0 z-40 glass border-b ${isDark ? 'border-white/5' : 'border-black/5'} backdrop-blur-md`}>
       <h1 className="font-display font-bold text-xl tracking-tight">Centro de Mando</h1>
       
       <div className="flex items-center gap-2">
