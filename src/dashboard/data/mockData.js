@@ -98,14 +98,17 @@ export function computeTaxWaterfall(grossIncome, cogs) {
   const ganancias = Math.round(Math.max(0, afterCOGS) * TAX_RATES.ganancias.rate);
   const plataLimpia = afterCOGS - ganancias;
 
+  const getPct = (val) => grossIncome > 0 ? (Math.abs(val) / grossIncome) * 100 : 0;
+
   return {
     grossIncome,
     steps: [
-      { label: 'Ingreso Bruto', value: grossIncome, type: 'income' },
-      { label: `Pasarela / MercadoPago (${TAX_RATES.gateway.rate * 100}%)`, value: -gateway, type: 'deduction' },
-      { label: `Ingresos Brutos IIBB (${TAX_RATES.iibb.rate * 100}%)`, value: -iibb, type: 'deduction' },
-      { label: 'Costo de Mercadería (Hardware + Fletes)', value: -cogs, type: 'cost' },
-      { label: `Impuesto a las Ganancias (${TAX_RATES.ganancias.rate * 100}%)`, value: -ganancias, type: 'tax' },
+      { label: 'Ingreso Bruto', value: grossIncome, type: 'income', percentage: 100 },
+      { label: `Pasarela / MercadoPago (${TAX_RATES.gateway.rate * 100}%)`, value: -gateway, type: 'deduction', percentage: getPct(gateway) },
+      { label: `Ingresos Brutos IIBB (${TAX_RATES.iibb.rate * 100}%)`, value: -iibb, type: 'deduction', percentage: getPct(iibb) },
+      { label: 'Costo de Mercadería (Hardware + Fletes)', value: -cogs, type: 'cost', percentage: getPct(cogs) },
+      { label: `Impuesto a las Ganancias (${TAX_RATES.ganancias.rate * 100}%)`, value: -ganancias, type: 'tax', percentage: getPct(ganancias) },
+      { label: 'Plata Limpia (Caja Neta)', value: plataLimpia, type: 'final', percentage: getPct(plataLimpia) },
     ],
     plataLimpia: Math.round(plataLimpia),
     breakdown: { gateway, iibb, cogs, ganancias },

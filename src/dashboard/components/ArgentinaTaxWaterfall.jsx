@@ -60,7 +60,7 @@ export default function ArgentinaTaxWaterfall() {
               <div className="h-2 w-full bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
-                  animate={{ width: `${Math.max(2, item.percentage || 100)}%` }}
+                  animate={{ width: `${Math.max(2, item.percentage ?? 100)}%` }}
                   transition={{ delay: index * 0.1 + 0.2, duration: 0.8, ease: "easeOut" }}
                   className={`h-full rounded-full ${
                     isInitial ? 'bg-emerald' : 
