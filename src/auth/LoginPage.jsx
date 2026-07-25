@@ -35,7 +35,6 @@ const LoginPage = () => {
 
     try {
       await login(email, password);
-      // login will update context, which triggers the useEffect to redirect
       navigate('/dashboard', { replace: true });
     } catch (err) {
       setError('Credenciales inválidas. Por favor, intenta nuevamente.');
@@ -45,26 +44,32 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-obsidian flex items-center justify-center p-4 selection:bg-emerald/30 selection:text-emerald-light">
+    <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-4 selection:bg-emerald-500/30 selection:text-emerald-200">
+      
+      {/* Top ambient glow */}
+      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-emerald-500/20 rounded-full blur-[120px] pointer-events-none" />
+
       <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-md"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-[420px] z-10"
       >
-        <div className="glass-card p-8 md:p-10 flex flex-col items-center">
+        <div className="bg-[#0A0A0A] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)] rounded-2xl p-8 md:p-10 flex flex-col items-center">
+          
           {/* Logo */}
-          <div className="mb-8">
-            <img src={logoSvg} alt="UnToque Logo" className="h-12 w-auto object-contain" />
+          <div className="mb-8 p-3 bg-white/[0.03] border border-white/[0.05] rounded-xl">
+            {/* Adding brightness(0) invert(1) if logo is originally black */}
+            <img src={logoSvg} alt="UnToque Logo" className="h-8 w-auto object-contain brightness-0 invert opacity-90" />
           </div>
 
           {/* Header */}
           <div className="text-center mb-8 w-full">
-            <h1 className="text-3xl font-bold text-ghost tracking-tight mb-2">
+            <h1 className="text-2xl font-semibold text-white tracking-tight mb-2">
               Centro de Mando
             </h1>
-            <p className="text-smoke text-sm">
-              Acceso Administrador
+            <p className="text-zinc-400 text-sm">
+              Ingresa tus credenciales de administrador
             </p>
           </div>
 
@@ -72,59 +77,59 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className="w-full space-y-5">
             {/* Error Message */}
             {error && (
-              <div className="bg-coral-soft/10 border border-coral-soft/20 rounded-lg p-3 text-coral text-sm text-center">
+              <motion.div 
+                initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
+                className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 flex items-center justify-center text-red-400 text-sm text-center"
+              >
                 {error}
-              </div>
+              </motion.div>
             )}
 
             {/* Email Input */}
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-slate-dark uppercase tracking-wider pl-1">
+            <div className="space-y-2">
+              <label className="text-[13px] font-medium text-zinc-300">
                 Correo Electrónico
               </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-dark group-focus-within:text-emerald transition-colors">
-                  <Mail size={18} />
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500 group-focus-within:text-emerald-400 transition-colors">
+                  <Mail size={18} strokeWidth={2} />
                 </div>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@untoque.com"
-                  className="w-full bg-void/50 border border-charcoal rounded-xl py-3 pl-10 pr-4 text-ghost placeholder-slate-dark focus:outline-none focus:border-emerald/50 focus:ring-1 focus:ring-emerald/50 transition-all duration-300"
+                  className="w-full bg-[#111] border border-white/[0.1] rounded-xl py-3 pl-11 pr-4 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all duration-300 shadow-inner shadow-black/20"
                   required
                 />
               </div>
             </div>
 
             {/* Password Input */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between items-center pl-1">
-                <label className="text-xs font-medium text-slate-dark uppercase tracking-wider">
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <label className="text-[13px] font-medium text-zinc-300">
                   Contraseña
                 </label>
-                <a href="#" className="text-xs text-emerald hover:text-emerald-light transition-colors">
-                  ¿Olvidaste tu contraseña?
-                </a>
               </div>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-dark group-focus-within:text-emerald transition-colors">
-                  <Lock size={18} />
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500 group-focus-within:text-emerald-400 transition-colors">
+                  <Lock size={18} strokeWidth={2} />
                 </div>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-void/50 border border-charcoal rounded-xl py-3 pl-10 pr-10 text-ghost placeholder-slate-dark focus:outline-none focus:border-emerald/50 focus:ring-1 focus:ring-emerald/50 transition-all duration-300"
+                  className="w-full bg-[#111] border border-white/[0.1] rounded-xl py-3 pl-11 pr-11 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all duration-300 shadow-inner shadow-black/20"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-dark hover:text-ghost transition-colors focus:outline-none"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-zinc-500 hover:text-zinc-300 transition-colors focus:outline-none"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={18} strokeWidth={2} /> : <Eye size={18} strokeWidth={2} />}
                 </button>
               </div>
             </div>
@@ -133,14 +138,14 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full mt-6 bg-gradient-to-r from-emerald to-[#0ea5e9] hover:from-emerald-light hover:to-[#38bdf8] text-void font-semibold py-3.5 px-4 rounded-xl flex justify-center items-center gap-2 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] active:scale-[0.98]"
+              className="w-full mt-4 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold py-3 px-4 rounded-xl flex justify-center items-center gap-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] active:scale-[0.98]"
             >
               {isLoading ? (
-                <Loader2 size={20} className="animate-spin" />
+                <Loader2 size={18} className="animate-spin" />
               ) : (
                 <>
-                  <span>Ingresar</span>
-                  <ArrowRight size={20} />
+                  <span>Iniciar Sesión</span>
+                  <ArrowRight size={18} strokeWidth={2.5} />
                 </>
               )}
             </button>
@@ -148,7 +153,7 @@ const LoginPage = () => {
         </div>
         
         {/* Footer info */}
-        <div className="mt-8 text-center text-xs text-slate-dark">
+        <div className="mt-8 text-center text-[13px] text-zinc-500">
           <p>&copy; {new Date().getFullYear()} UnToque. Todos los derechos reservados.</p>
         </div>
       </motion.div>
