@@ -23,9 +23,9 @@ export default function ArgentinaTaxWaterfall() {
       </div>
 
       <div className="space-y-3 relative">
-        {waterfall.map((item, index) => {
+        {waterfall.steps.map((item, index) => {
           const isInitial = index === 0;
-          const isFinal = index === waterfall.length - 1;
+          const isFinal = index === waterfall.steps.length - 1;
           const isDeduction = !isInitial && !isFinal;
           
           return (
