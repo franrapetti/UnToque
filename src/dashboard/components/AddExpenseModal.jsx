@@ -65,7 +65,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="glass-card w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative"
+        className="bg-white dark:bg-[#0a0a0a] w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 relative"
       >
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">

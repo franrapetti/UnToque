@@ -55,11 +55,8 @@ export default function KPICards() {
         initial="hidden"
         animate="show"
         variants={itemVariants}
-        className="glass-card glow-emerald rounded-2xl p-6 relative overflow-hidden flex flex-col"
+        className="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col"
       >
-        {isDark && (
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald/5 rounded-full blur-2xl pointer-events-none"></div>
-        )}
         <div className="flex justify-between items-start mb-4 relative z-10">
           <div className="p-2 rounded-xl bg-emerald/10 text-emerald">
             <DollarSign className="w-6 h-6" />
@@ -89,11 +86,8 @@ export default function KPICards() {
         initial="hidden"
         animate="show"
         variants={itemVariants}
-        className="glass-card glow-sapphire rounded-2xl p-6 relative overflow-hidden flex flex-col"
+        className="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col"
       >
-        {isDark && (
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-sapphire/5 rounded-full blur-2xl pointer-events-none"></div>
-        )}
         <div className="flex justify-between items-start mb-4 relative z-10">
           <div className="p-2 rounded-xl bg-sapphire/10 text-sapphire">
             <Wallet className="w-6 h-6" />
@@ -118,11 +112,8 @@ export default function KPICards() {
         initial="hidden"
         animate="show"
         variants={itemVariants}
-        className="glass-card glow-violet rounded-2xl p-6 relative overflow-hidden flex flex-col"
+        className="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col"
       >
-        {isDark && (
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-violet/5 rounded-full blur-2xl pointer-events-none"></div>
-        )}
         <div className="flex justify-between items-start mb-4 relative z-10">
           <div className="p-2 rounded-xl bg-violet/10 text-violet">
             <Package className="w-6 h-6" />
@@ -165,11 +156,8 @@ export default function KPICards() {
         initial="hidden"
         animate="show"
         variants={itemVariants}
-        className="glass-card glow-amber rounded-2xl p-6 relative overflow-hidden flex flex-col"
+        className="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col"
       >
-        {isDark && (
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-amber/5 rounded-full blur-2xl pointer-events-none"></div>
-        )}
         <div className="flex justify-between items-start mb-4 relative z-10">
           <div className="p-2 rounded-xl bg-amber/10 text-amber">
             <Fuel className="w-6 h-6" />
