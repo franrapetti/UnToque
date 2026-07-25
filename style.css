@@ -26,13 +26,11 @@
 }
 
 /* Reset */
-* {
+.landing-scope * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-body {
+.landing-scope {
   font-family: var(--font-body);
   background-color: var(--paper);
   color: var(--ink);
@@ -40,7 +38,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.landing-scope h1, .landing-scope h2, .landing-scope h3, .landing-scope h4, .landing-scope h5, .landing-scope h6 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.1;
@@ -48,12 +46,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Base Styles */
-a {
+.landing-scope a {
   color: inherit;
   text-decoration: none;
 }
 
-button, .btn {
+.landing-scope button, .landing-scope .btn {
   font-family: var(--font-body);
   font-weight: 600;
   cursor: pointer;
@@ -62,14 +60,14 @@ button, .btn {
   transition: all 0.2s ease;
 }
 
-.btn-primary {
+.landing-scope .btn-primary {
   background-color: var(--signal);
   color: var(--ink);
   padding: 12px 24px;
   font-size: 16px;
 }
 
-.btn-primary:hover {
+.landing-scope .btn-primary:hover {
   filter: brightness(0.95);
 }
 

@@ -58,7 +58,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="landing-scope">
       {/* Preloader */}
       {showPreloader && (
         <div id="preloader" className="preloader">
@@ -397,7 +397,7 @@ const LandingPage = () => {
               <h2 className="text-display text-center">Footer</h2>
           </div>
       </footer>
-    </>
+    </div>
   );
 };
 
