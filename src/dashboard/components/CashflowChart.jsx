@@ -9,7 +9,20 @@ import { TrendingUp } from 'lucide-react';
 export default function CashflowChart() {
   const { theme, isDark } = useTheme();
   const { dateRange } = useFilter();
-  const data = getCashflowData(dateRange);
+  let data = getCashflowData(dateRange);
+  
+  // Si no hay datos, generar un baseline vacío de 7 días para que el gráfico dibuje los ejes
+  if (!data || data.length === 0) {
+    data = Array.from({ length: 7 }).map((_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - (6 - i));
+      return {
+        date: d.toISOString().split('T')[0],
+        ingresos: 0,
+        gastos: 0
+      };
+    });
+  }
 
   // Custom tooltip
   const CustomTooltip = ({ active, payload, label }) => {
