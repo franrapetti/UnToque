@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, DollarSign, User, MapPin, Package, Hash, CreditCard } from 'lucide-react';
 import { addOrder } from '../data/orderStore';
-import { getProducts } from '../data/catalogStore';
+import { getProductsCached } from '../data/catalogStore';
 import { useTheme } from '../ThemeContext';
 
 export default function AddOrderModal({ isOpen, onClose, onAdded }) {
@@ -23,7 +23,7 @@ export default function AddOrderModal({ isOpen, onClose, onAdded }) {
 
   useEffect(() => {
     if (isOpen) {
-      const prodList = getProducts();
+      const prodList = getProductsCached();
       setProducts(prodList);
       if (prodList.length > 0 && !formData.productId) {
         setFormData(prev => ({ ...prev, productId: prodList[0].id }));
@@ -56,7 +56,7 @@ export default function AddOrderModal({ isOpen, onClose, onAdded }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
     if (!formData.customer) newErrors.customer = 'Requerido';
@@ -71,7 +71,7 @@ export default function AddOrderModal({ isOpen, onClose, onAdded }) {
 
     const product = products.find(p => p.id === formData.productId);
 
-    addOrder({
+    await addOrder({
       customer: formData.customer,
       city: formData.city,
       productId: formData.productId,

@@ -1,37 +1,60 @@
-const STORAGE_KEY = 'untoque_orders';
+import { db } from '../../firebase';
+import { 
+  collection, 
+  getDocs, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  doc, 
+  query, 
+  orderBy 
+} from 'firebase/firestore';
 
-export function getOrdersStore() {
-  const existing = localStorage.getItem(STORAGE_KEY);
-  if (!existing) return [];
-  return JSON.parse(existing);
+const COLLECTION = 'orders';
+
+let cachedOrders = null;
+
+export async function getOrdersStore() {
+  try {
+    const q = query(collection(db, COLLECTION), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    cachedOrders = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    return cachedOrders;
+  } catch (err) {
+    console.error('Error fetching orders:', err);
+    return cachedOrders || [];
+  }
 }
 
-export function addOrder(order) {
-  const orders = getOrdersStore();
-  const newOrder = { 
-    ...order, 
-    id: `ord-${Math.floor(Math.random() * 10000)}`, // short id for display
+export function getOrdersCached() {
+  return cachedOrders || [];
+}
+
+export async function addOrder(order) {
+  const data = {
+    ...order,
     date: order.date || new Date().toISOString().split('T')[0],
     createdAt: new Date().toISOString()
   };
-  orders.unshift(newOrder); // Add to beginning
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+  const docRef = await addDoc(collection(db, COLLECTION), data);
+  const newOrder = { id: docRef.id, ...data };
+  if (cachedOrders) cachedOrders.unshift(newOrder);
   return newOrder;
 }
 
-export function updateOrder(id, updates) {
-  const orders = getOrdersStore();
-  const idx = orders.findIndex(o => o.id === id);
-  if (idx !== -1) {
-    orders[idx] = { ...orders[idx], ...updates };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
-    return orders[idx];
+export async function updateOrder(id, updates) {
+  const docRef = doc(db, COLLECTION, id);
+  await updateDoc(docRef, updates);
+  if (cachedOrders) {
+    const idx = cachedOrders.findIndex(o => o.id === id);
+    if (idx !== -1) cachedOrders[idx] = { ...cachedOrders[idx], ...updates };
   }
-  return null;
 }
 
-export function deleteOrder(id) {
-  const orders = getOrdersStore();
-  const filtered = orders.filter(o => o.id !== id);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+export async function deleteOrder(id) {
+  const docRef = doc(db, COLLECTION, id);
+  await deleteDoc(docRef);
+  if (cachedOrders) {
+    cachedOrders = cachedOrders.filter(o => o.id !== id);
+  }
 }

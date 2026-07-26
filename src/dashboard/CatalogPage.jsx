@@ -18,8 +18,16 @@ export default function CatalogPage() {
     image: ''
   });
 
+  const [loading, setLoading] = useState(true);
+
+  const loadProducts = async () => {
+    const data = await getProducts();
+    setProducts(data);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    setProducts(getProducts());
+    loadProducts();
   }, []);
 
   const handleOpenModal = (product = null) => {
@@ -49,7 +57,7 @@ export default function CatalogPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const productData = {
       name: formData.name,
@@ -60,18 +68,20 @@ export default function CatalogPage() {
     };
 
     if (editingProduct) {
-      updateProduct(editingProduct.id, productData);
+      await updateProduct(editingProduct.id, productData);
     } else {
-      addProduct(productData);
+      await addProduct(productData);
     }
-    setProducts(getProducts());
+    await loadProducts();
+    window.dispatchEvent(new Event('catalog-updated'));
     handleCloseModal();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm('¿Seguro que quieres eliminar este producto?')) {
-      deleteProduct(id);
-      setProducts(getProducts());
+      await deleteProduct(id);
+      await loadProducts();
+      window.dispatchEvent(new Event('catalog-updated'));
     }
   };
 

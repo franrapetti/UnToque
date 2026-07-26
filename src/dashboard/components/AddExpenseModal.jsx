@@ -26,7 +26,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
     if (!formData.name) newErrors.name = 'Requerido';
@@ -38,7 +38,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
       return;
     }
 
-    addExpense({
+    await addExpense({
       name: formData.name,
       amount: parseFloat(formData.amount),
       temporality: formData.temporality,
@@ -48,6 +48,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
     });
 
     onAdded();
+    window.dispatchEvent(new Event('expenses-updated'));
     onClose();
     setFormData({
       name: '',

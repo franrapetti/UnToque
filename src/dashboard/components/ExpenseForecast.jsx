@@ -11,24 +11,27 @@ export default function ExpenseForecast() {
   const [expenses, setExpenses] = useState({ byDay: [], byWeek: [], byMonth: [] });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const refreshExpenses = () => {
-    setExpenses(getExpensesByTemporality());
+  const refreshExpenses = async () => {
+    const data = await getExpensesByTemporality();
+    setExpenses(data);
   };
 
   useEffect(() => {
     refreshExpenses();
   }, []);
 
-  const toggleStatus = (expense) => {
-    updateExpense(expense.id, {
+  const toggleStatus = async (expense) => {
+    await updateExpense(expense.id, {
       status: expense.status === 'Pendiente' ? 'Pagado' : 'Pendiente'
     });
-    refreshExpenses();
+    await refreshExpenses();
+    window.dispatchEvent(new Event('expenses-updated'));
   };
 
-  const handleDelete = (id) => {
-    deleteExpense(id);
-    refreshExpenses();
+  const handleDelete = async (id) => {
+    await deleteExpense(id);
+    await refreshExpenses();
+    window.dispatchEvent(new Event('expenses-updated'));
   };
 
   const ExpenseCard = ({ expense }) => (

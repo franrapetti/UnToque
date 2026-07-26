@@ -18,9 +18,10 @@ export default function OrdersTable() {
   // Real orders instead of mock
   const [allOrders, setAllOrders] = useState([]);
   
-  // Load orders
-  const loadOrders = () => {
-    setAllOrders(getOrdersStore());
+  // Load orders from Firestore
+  const loadOrders = async () => {
+    const orders = await getOrdersStore();
+    setAllOrders(orders);
   };
 
   React.useEffect(() => {

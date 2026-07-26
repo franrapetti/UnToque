@@ -1,6 +1,6 @@
-import { getOrdersStore } from './orderStore';
-import { getExpenses } from './expenseStore';
-import { getProducts } from './catalogStore';
+import { getOrdersCached } from './orderStore';
+import { getExpensesCached } from './expenseStore';
+import { getProductsCached } from './catalogStore';
 
 // ─── Seeded PRNG for deterministic mock data ───
 function mulberry32(a) {
@@ -49,7 +49,7 @@ const CITIES = [
   'Mar del Plata','Salta','Neuquén','Bahía Blanca',
 ];
 
-// ─── Generate 365 days of daily data ───
+// ─── Generate empty data ───
 function generateAllData() {
   return { dailyData: [], orders: [] };
 }
@@ -66,12 +66,12 @@ export function filterByDateRange(data, dateRange) {
   });
 }
 
-// ─── Exported Data Functions ───
+// ─── Exported Data Functions (use cached data from stores) ───
 
 export function getKPIs(dateRange) {
-  const orders = filterByDateRange(getOrdersStore(), dateRange);
-  const expenses = filterByDateRange(getExpenses(), dateRange);
-  const catalog = getProducts();
+  const orders = filterByDateRange(getOrdersCached(), dateRange);
+  const expenses = filterByDateRange(getExpensesCached(), dateRange);
+  const catalog = getProductsCached();
 
   let totalSales = 0;
   let hardwareSales = 0;
@@ -80,43 +80,42 @@ export function getKPIs(dateRange) {
 
   orders.forEach(o => {
     totalSales += o.amount;
-    if (o.product.toLowerCase().includes('saas') || o.product.toLowerCase().includes('plan')) {
+    if (o.product && (o.product.toLowerCase().includes('saas') || o.product.toLowerCase().includes('plan'))) {
       saasSales += o.amount;
     } else {
       hardwareSales += o.amount;
-      // assuming a flat cost ratio for now since catalog doesn't track cost
-      totalCost += Math.round(o.amount * 0.25); 
+      totalCost += Math.round(o.amount * 0.25);
     }
   });
 
-  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-  
-  // Tax Waterfall logic to get Net Cash
+  const totalExpenses = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+
   const waterfall = computeTaxWaterfall(totalSales, totalCost);
   const netCash = waterfall.plataLimpia - totalExpenses;
 
   return {
-    totalSales, hardwareSales, saasSales, salesChange: 15.2, // mock percentages for now
-    netCash, netCashChange: 8.4, grossIncome: totalSales, totalExpenses,
-    totalCost, nfcStock: catalog.reduce((acc, p) => acc + p.stock, 0), standsStock: 0,
+    totalSales, hardwareSales, saasSales, salesChange: 0,
+    netCash, netCashChange: 0, grossIncome: totalSales, totalExpenses,
+    totalCost, nfcStock: catalog.reduce((acc, p) => acc + (p.stock || 0), 0), standsStock: 0,
     nfcStockMax: 500, standsStockMax: 150,
-    runwayDays: 120, runwayAmount: 0, subscriptions: 0,
+    runwayDays: 0, runwayAmount: 0, subscriptions: 0,
   };
 }
 
 export function getCashflowData(dateRange) {
-  const orders = filterByDateRange(getOrdersStore(), dateRange);
-  const expenses = filterByDateRange(getExpenses(), dateRange);
+  const orders = filterByDateRange(getOrdersCached(), dateRange);
+  const expenses = filterByDateRange(getExpensesCached(), dateRange);
 
-  // group by date
   const grouped = {};
   orders.forEach(o => {
     const d = o.date;
+    if (!d) return;
     if (!grouped[d]) grouped[d] = { ingresos: 0, gastos: 0 };
     grouped[d].ingresos += o.amount;
   });
   expenses.forEach(e => {
     const d = e.temporality === 'day' ? e.date : (e.createdAt || new Date().toISOString()).split('T')[0];
+    if (!d) return;
     if (!grouped[d]) grouped[d] = { ingresos: 0, gastos: 0 };
     grouped[d].gastos += e.amount;
   });
@@ -129,26 +128,26 @@ export function getCashflowData(dateRange) {
 }
 
 export function getOrders(dateRange) {
-  return filterByDateRange(getOrdersStore(), dateRange);
+  return filterByDateRange(getOrdersCached(), dateRange);
 }
 
 export function getActivityLog() {
-  const orders = getOrdersStore().map(o => ({
+  const orders = getOrdersCached().map(o => ({
     id: o.id,
     type: 'sale',
     title: `Nueva Venta: ${o.customer}`,
-    description: `${o.quantity}x ${o.product}`,
+    description: `${o.quantity || 1}x ${o.product}`,
     amount: o.amount,
     date: o.createdAt,
     icon: 'money'
   }));
 
-  const expenses = getExpenses().map(e => ({
+  const expenses = getExpensesCached().map(e => ({
     id: e.id,
     type: 'expense',
     title: `Gasto: ${e.name}`,
     description: e.category,
-    amount: -e.amount,
+    amount: -(e.amount || 0),
     date: e.createdAt,
     icon: 'receipt'
   }));
