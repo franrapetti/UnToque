@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CalendarClock, Plus, Check, Clock, Trash2, Calendar, CalendarDays, CalendarRange } from 'lucide-react';
+import { CalendarClock, Plus, Check, Clock, Trash2, Calendar, CalendarDays, CalendarRange, User, Wallet } from 'lucide-react';
 import { getExpensesByTemporality, updateExpense, deleteExpense } from '../data/expenseStore';
 import AddExpenseModal from './AddExpenseModal';
 import { formatARSFull } from '../data/mockData';
@@ -19,6 +19,20 @@ export default function ExpenseForecast() {
   useEffect(() => {
     refreshExpenses();
   }, []);
+
+  const calculateBalances = () => {
+    const balances = {};
+    const allExpenses = [...expenses.byDay, ...expenses.byWeek, ...expenses.byMonth];
+    allExpenses.forEach(exp => {
+      if (exp.status === 'Pagado' && exp.paidBy && exp.paidBy.trim() !== '') {
+        const name = exp.paidBy.trim();
+        balances[name] = (balances[name] || 0) + exp.amount;
+      }
+    });
+    return balances;
+  };
+  
+  const balances = calculateBalances();
 
   const toggleStatus = async (expense) => {
     await updateExpense(expense.id, {
@@ -70,6 +84,12 @@ export default function ExpenseForecast() {
           {expense.status === 'Pendiente' ? '🟡 Pendiente' : '✅ Pagado'}
         </button>
       </div>
+      {expense.status === 'Pagado' && expense.paidBy && (
+        <div className="mt-3 pt-3 border-t border-black/5 dark:border-white/5 flex items-center gap-1.5 text-xs text-silver">
+          <User size={12} />
+          Pagado por: <span className="font-semibold text-sapphire dark:text-sapphire-light">{expense.paidBy}</span>
+        </div>
+      )}
     </motion.div>
   );
 
@@ -78,16 +98,38 @@ export default function ExpenseForecast() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div className="flex items-center gap-2">
           <CalendarClock className="text-sapphire w-6 h-6" />
-          <h2 className="text-xl font-bold dark:text-ghost">Gastos por Venir — Cashflow Forecast</h2>
+          <h2 className="text-xl font-bold dark:text-ghost">Registro de Gastos</h2>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
           className="flex items-center gap-2 bg-emerald hover:bg-emerald/90 text-white px-4 py-2 rounded-lg font-medium transition-all"
         >
           <Plus size={18} />
-          Añadir Gasto Futuro
+          Añadir Gasto
         </button>
       </div>
+
+      {Object.keys(balances).length > 0 && (
+        <div className="mb-8 p-4 rounded-xl bg-gradient-to-br from-sapphire/5 to-emerald/5 border border-white/5">
+          <div className="flex items-center gap-2 mb-3">
+            <Wallet className="text-sapphire w-5 h-5" />
+            <h3 className="font-semibold dark:text-ghost">Balance de Pagos (Bolsillo de Socios)</h3>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            {Object.entries(balances).map(([name, amount]) => (
+              <div key={name} className="flex items-center gap-3 bg-white/50 dark:bg-black/20 px-4 py-2 rounded-lg border border-black/5 dark:border-white/5">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sapphire to-emerald flex items-center justify-center text-white font-bold text-sm">
+                  {name.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <div className="text-xs text-silver">{name} pagó</div>
+                  <div className="font-bold tabular-nums dark:text-ghost">{formatARSFull(amount)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Day Column */}

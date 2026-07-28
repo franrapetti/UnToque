@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, DollarSign, Calendar, CalendarDays, CalendarRange, Tag } from 'lucide-react';
+import { X, DollarSign, Calendar, CalendarDays, CalendarRange, Tag, User } from 'lucide-react';
 import { addExpense } from '../data/expenseStore';
 import { useTheme } from '../ThemeContext';
 
@@ -12,7 +12,8 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
     temporality: 'day', // day, week, month
     dateValue: '',
     status: 'Pendiente',
-    category: 'operations'
+    category: 'operations',
+    paidBy: ''
   });
   const [errors, setErrors] = useState({});
 
@@ -44,7 +45,8 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
       temporality: formData.temporality,
       [formData.temporality === 'day' ? 'date' : formData.temporality === 'week' ? 'week' : 'month']: formData.dateValue,
       status: formData.status,
-      category: formData.category
+      category: formData.category,
+      paidBy: formData.status === 'Pagado' ? formData.paidBy : ''
     });
 
     onAdded();
@@ -56,7 +58,8 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
       temporality: 'day',
       dateValue: '',
       status: 'Pendiente',
-      category: 'operations'
+      category: 'operations',
+      paidBy: ''
     });
   };
 
@@ -70,7 +73,7 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
       >
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold dark:text-ghost">Añadir Gasto Futuro</h3>
+            <h3 className="text-xl font-bold dark:text-ghost">Añadir Gasto</h3>
             <button onClick={onClose} className="text-silver hover:text-ghost transition-colors">
               <X size={24} />
             </button>
@@ -197,6 +200,29 @@ export default function AddExpenseModal({ isOpen, onClose, onAdded }) {
                 </div>
               </div>
             </div>
+
+            <AnimatePresence>
+              {formData.status === 'Pagado' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
+                  <label className="label-text block mb-1">¿Quién lo pagó?</label>
+                  <div className="relative">
+                    <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-silver" />
+                    <input 
+                      type="text" 
+                      name="paidBy"
+                      value={formData.paidBy}
+                      onChange={handleChange}
+                      placeholder="Ej. Fran, Caja, Juan"
+                      className="w-full bg-black/5 dark:bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 outline-none focus:border-emerald transition-colors dark:text-ghost"
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
               <button
